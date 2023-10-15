@@ -2,15 +2,8 @@
 
 function atLeastFive(array, operation) {
   // Start coding here
-  let count = 0;
-  for (let i=0; i < array.length; i++){
-    if(array[i] >= 70){
-      count = count + 1;
-     }
-    //console.log(array[i] + " in Rount "+ (i+1) + " : count = " + count); //show ค่าของ array และ การนับ count
-  }
-//console.log("\nSummary Count = "+ count+"\n") //จำนวนนักเรียนที่มีคะแนนมากกว่าหรือเท่ากับ 5
-return operation(count);
+  const count = array.filter(operation).length;
+  return count >= 5;
 }
 
 const count = (num) => {
@@ -23,11 +16,20 @@ const studentScoresRoom2 = [78, 98, 23, 15, 40, 12, 40, 67, 80, 100];
 const studentScoresRoom3 = [67, 80, 100, 15, 12, 40, 67, 80, 100, 67];
 
 // Using `atLeastFive` function here
+// สร้าง Callback Function ที่ตรวจสอบคะแนนมากกว่า 70
+function checkAbove70(score) {
+  return score > 70;
+}
 
-let scoreRoom1Result = atLeastFive(studentScoresRoom1,count);
-let scoreRoom2Result = atLeastFive(studentScoresRoom2,count);
-let scoreRoom3Result = atLeastFive(studentScoresRoom3,count);
+let scoreRoom1Result;
+let scoreRoom2Result;
+let scoreRoom3Result;
 
-console.log(scoreRoom1Result);
-console.log(scoreRoom2Result);
-console.log(scoreRoom3Result);
+// ใช้ atLeastFive เพื่อตรวจสอบคะแนนของนักเรียนแต่ละห้อง
+scoreRoom1Result = atLeastFive(studentScoresRoom1, checkAbove70);
+scoreRoom2Result = atLeastFive(studentScoresRoom2, checkAbove70);
+scoreRoom3Result = atLeastFive(studentScoresRoom3, checkAbove70);
+
+console.log("Room 1:", scoreRoom1Result);
+console.log("Room 2:", scoreRoom2Result);
+console.log("Room 3:", scoreRoom3Result);
